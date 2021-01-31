@@ -16,8 +16,7 @@
     "express-async-errors": "^3.1.1",
     "helmet": "^4.4.1",
     "morgan": "^1.10.0",
-    "yup": "^0.32.8",
-    "yup-locale-pt": "^0.0.6"
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@types/compression": "^1.7.0",

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import HttpException from "../exceptions/HttpException";
+import HttpException from "@/exceptions/HttpException";
 import NewNotFoundError from "@/exceptions/NewNotFoundError";
 
 const RouteErrorNotFound = (
@@ -8,7 +8,7 @@ const RouteErrorNotFound = (
     res: Response,
     next: NextFunction
 ) => {
-    throw new NewNotFoundError(`Rota '${req.path}' não foi encontrada`);
+    throw new NewNotFoundError(`Route '${req.path}' was not found`);
 };
 
 const ErrorMiddleware = (
@@ -36,7 +36,7 @@ const ErrorMiddleware = (
     }
 
     return res.status(500).json({
-        message: "Error desconhecido do servidor",
+        message: "Internal server error",
         status: 500,
         error: "Internal Server Error",
         causes: null,

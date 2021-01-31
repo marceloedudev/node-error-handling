@@ -7,16 +7,13 @@ import {
     RouteErrorNotFound,
 } from "@/middleware/ErrorMiddleware";
 
-import NewInternalServerError from "./exceptions/NewInternalServerError";
-import Validate from "./validators/Validate";
+import NewInternalServerError from "@/exceptions/NewInternalServerError";
+import Validate from "@/validators/Validate";
 import compression from "compression";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import { pt } from "yup-locale-pt";
-
-Yup.setLocale(pt);
 
 const app = express();
 
@@ -34,14 +31,14 @@ app.get("/", (req, res) => {
 
 app.post("/status", async (req, res) => {
     const schema = Yup.object().shape({
-        nome: Yup.string().required(),
+        name: Yup.string().required(),
         email: Yup.string().email().required(),
     });
     const validationError: Array<string> = await Validate(schema, req.body);
 
     if (validationError) {
         throw new NewInternalServerError(
-            "Houve algum problema na validação",
+            "There was a problem with validation",
             validationError
         );
     }

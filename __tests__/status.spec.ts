@@ -4,7 +4,7 @@ import request from "supertest";
 describe("POST /status", () => {
     it("should be able to return the data", async () => {
         const response = await request(app).post("/status").send({
-            nome: "Marcelo",
+            name: "Marcelo",
             email: "example@gmail.com",
         });
 
@@ -13,7 +13,7 @@ describe("POST /status", () => {
 
     it("should be able to show the 'causes' field", async () => {
         const response = await request(app).post("/status").send({
-            nome: "Marcelo",
+            name: "Marcelo",
             email2: "example@gmail.com",
         });
 
@@ -22,7 +22,7 @@ describe("POST /status", () => {
 
     it("should not be able to with just the name field", async () => {
         const response = await request(app).post("/status").send({
-            nome: "Marcelo",
+            name: "Marcelo",
         });
 
         expect(response.status).toEqual(500);

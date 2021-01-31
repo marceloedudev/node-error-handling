@@ -1,45 +1,45 @@
 # NodeJS Error Handling
 
-Tratamentos de erros e dos dados recebidos
+Error and data handling
 
-## Rotas
+## Endpoints
 
 `POST /status`
 
-Exemplo do Body da requisição:
+Example request body:
 ```JSON
 {
-    "nome": "Example",
+    "name": "Example",
     "email": "example@gmail.com"
 }
 ```
 
-Os campos obrigatórios: `nome`, `email`
+Required fields: `name`, `email`
 
-## Validação dos dados com Yup
+## Validation of data with Yup
 
 ```JAVASCRIPT
     const schema = Yup.object().shape({
-        nome: Yup.string().required(),
+        name: Yup.string().required(),
         email: Yup.string().email().required(),
     });
     const validationError: Array<string> = await Validate(schema, req.body);
 ```
 
-`validationError` retorna `array` de string ou `nulo` se estiver válido
+`validationError` returns string `array` or `null` if valid
 
-## Formato de erros
+## Error format
 
-Se uma solicitação falhar em qualquer validação, espere erros no seguinte formato:
+If a request fails any validation, expect errors in the following format:
 
 ```JSON
 {
-    "message": "Houve algum problema na validação",
+    "message": "There was a problem with validation",
     "status": 500,
     "error": "Internal Server Error",
     "causes": [
-        "nome é obrigatório",
-        "email é obrigatório"
+        "name is a required field",
+        "email is a required field"
     ],
     "timestamp": "2021-01-31T03:32:58.202Z",
     "path": "/status"
@@ -60,7 +60,7 @@ throw new HttpException(
 )
 ```
 
-Os campos obrigatórios: `message`, `status`, `error`
+Required fields: `message`, `status`, `error`
 
 ### NewBadRequestError
 
@@ -71,9 +71,9 @@ throw new NewBadRequestError(
 )
 ```
 
-Os campos obrigatórios: `message`
+Required fields: `message`
 
-Retorna status `400`
+Returns status `400`
 
 ### NewInternalServerError
 
@@ -84,9 +84,9 @@ throw new NewInternalServerError(
 )
 ```
 
-Os campos obrigatórios: `message`
+Required fields: `message`
 
-Retorna status `500`
+Returns status `500`
 
 ### NewNotAcceptableError
 
@@ -97,9 +97,9 @@ throw new NewNotAcceptableError(
 )
 ```
 
-Os campos obrigatórios: `message`
+Required fields: `message`
 
-Retorna status `406`
+Returns status `406`
 
 ### NewNotFoundError
 
@@ -109,9 +109,9 @@ throw new NewNotFoundError(
 )
 ```
 
-Os campos obrigatórios: `message`
+Required fields: `message`
 
-Retorna status `404`
+Returns status `404`
 
 ### NewTooManyRequestsError
 
@@ -122,9 +122,9 @@ throw new NewTooManyRequestsError(
 )
 ```
 
-Os campos obrigatórios: `message`
+Required fields: `message`
 
-Retorna status `429`
+Returns status `429`
 
 ### NewUnauthorizedError
 
@@ -135,6 +135,6 @@ throw new NewUnauthorizedError(
 )
 ```
 
-Os campos obrigatórios: `message`
+Required fields: `message`
 
-Retorna status `401`
+Returns status `401`
